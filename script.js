@@ -1,4 +1,40 @@
-// Menu latéral : ouvrir / fermer
+// ==========================================================
+// SCRIPT.JS — en-tête + menu (écrits UNE SEULE FOIS, ici)
+// Pour ajouter une page au menu, ajoute une ligne dans PAGES.
+// ==========================================================
+const PAGES = [
+  ["index.html",        "Accueil"],
+  ["cejm.html",         "CEJM"],
+  ["math.html",         "Math"],
+  ["informatique.html", "Informatique"],
+  ["culture-g.html",    "Culture G"],
+  ["anglais.html",      "Anglais"],
+  ["depose.html",       "Déposer un cours"],
+];
+
+// Nom de la page actuelle (index.html si l'adresse finit par /)
+const pageActuelle = location.pathname.split("/").pop() || "index.html";
+
+const liens = PAGES.map(([url, nom]) =>
+  `<li><a href="${url}"${url === pageActuelle ? ' aria-current="page"' : ""}>${nom}</a></li>`
+).join("");
+
+document.body.insertAdjacentHTML("afterbegin", `
+  <header class="site-header">
+    <button class="menu-btn" id="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <a class="site-title" href="index.html">Mes cours — BTS SIO</a>
+  </header>
+  <nav class="menu" id="menu" aria-label="Menu principal">
+    <div class="menu-top">
+      <strong>Menu</strong>
+      <button class="menu-btn" id="menu-close" aria-label="Fermer le menu">✕</button>
+    </div>
+    <ul>${liens}</ul>
+  </nav>
+  <div class="overlay" id="overlay"></div>
+`);
+
+// Ouverture / fermeture du menu
 const bouton  = document.getElementById("menu-btn");
 const menu    = document.getElementById("menu");
 const overlay = document.getElementById("overlay");
