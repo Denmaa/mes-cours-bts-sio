@@ -1,0 +1,142 @@
+/* ==========================================================
+   STYLE.CSS — Carnet de cours BTS SIO
+   Pour changer les couleurs : modifie les variables ci-dessous.
+   ========================================================== */
+:root {
+  --fond: #F5F5F0;
+  --carte: #ffffff;
+  --texte: #1d2433;
+  --texte-doux: #5a6475;
+  --bordure: #dde2ea;
+  --accent: #3345b8;          /* couleur par défaut (accueil) */
+  --accent-clair: #e8ebfa;
+  --rayon: 10px;
+  --largeur-menu: 280px;
+}
+/* Une couleur par matière : ajoute une ligne pour une nouvelle matière */
+body.cejm         { --accent: #a3412b; --accent-clair: #f8e9e4; }
+body.math         { --accent: #1f6f5c; --accent-clair: #e1f2ed; }
+body.informatique { --accent: #3345b8; --accent-clair: #e8ebfa; }
+body.culture-g    { --accent: #8a5a00; --accent-clair: #f7edd6; }
+body.anglais      { --accent: #7b3fa0; --accent-clair: #f0e7f6; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.65;
+  color: var(--texte);
+  background: var(--fond);
+}
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- En-tête ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 1rem;
+  padding: .75rem 1.25rem;
+  background: var(--carte);
+  border-bottom: 3px solid var(--accent);
+}
+.menu-btn {
+  font: inherit; font-size: 1.4rem; line-height: 1;
+  width: 2.75rem; height: 2.75rem;
+  border: 1px solid var(--bordure); border-radius: var(--rayon);
+  background: var(--carte); color: var(--texte); cursor: pointer;
+  transition: background .2s;
+}
+.menu-btn:hover { background: var(--accent-clair); }
+.site-title { font-weight: 700; text-decoration: none; color: var(--texte); }
+
+/* ---------- Menu qui s'ouvre depuis la gauche ---------- */
+.menu {
+  position: fixed; top: 0; left: 0; z-index: 40;
+  width: var(--largeur-menu); max-width: 85vw; height: 100%;
+  padding: 1.25rem;
+  background: var(--carte);
+  box-shadow: 4px 0 24px rgba(20, 30, 50, .15);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform .3s ease, visibility 0s linear .3s;
+}
+.menu.ouvert { transform: translateX(0); visibility: visible; transition: transform .3s ease; }
+.menu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.menu-top strong { font-size: 1.1rem; }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu a {
+  display: block; padding: .7rem .9rem; margin-bottom: .25rem;
+  border-radius: var(--rayon); text-decoration: none; color: var(--texte);
+  border-left: 4px solid transparent;
+}
+.menu a:hover { background: var(--accent-clair); }
+.menu a[aria-current="page"] { font-weight: 700; background: var(--accent-clair); border-left-color: var(--accent); }
+.overlay {
+  position: fixed; inset: 0; z-index: 30;
+  background: rgba(20, 30, 50, .4);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s ease, visibility 0s linear .3s;
+}
+.overlay.visible { opacity: 1; visibility: visible; transition: opacity .3s ease; }
+
+/* ---------- Contenu ---------- */
+main { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; margin: 0 0 .5rem; text-align: center; }
+h2 { font-size: 1.5rem; margin: 0 0 1rem; text-align: center; }
+h3 { font-size: 1.1rem; margin: 0 0 .4rem; text-align: center; }
+.intro { color: var(--texte-doux); font-size: 1.1rem; margin: 0 0 2rem; text-align: center; }
+
+section { margin-bottom: 3rem; }
+section > h2 { padding-bottom: .5rem; border-bottom: 2px solid var(--accent); }
+
+/* Cartes de l'accueil */
+.grille { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.grille .carte { width: 280px; max-width: 100%; }
+.carte {
+  display: block; padding: 1.25rem;
+  background: var(--carte); border: 1px solid var(--bordure);
+  border-top: 5px solid var(--accent);
+  border-radius: var(--rayon);
+  color: var(--texte); text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.carte:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(20, 30, 50, .1); }
+.carte p { margin: 0; color: var(--texte-doux); font-size: .95rem; }
+.carte.cejm         { --accent: #a3412b; }
+.carte.math         { --accent: #1f6f5c; }
+.carte.informatique { --accent: #3345b8; }
+.carte.culture-g    { --accent: #8a5a00; }
+.carte.anglais      { --accent: #7b3fa0; }
+
+/* Les 3 grands boutons de la page Informatique */
+.boutons-parties { display: grid; gap: .75rem; margin-bottom: 3rem; }
+.bouton-partie {
+  display: block; padding: 1.1rem 1.4rem;
+  background: var(--accent); color: #fff;
+  border-radius: var(--rayon);
+  font-size: 1.15rem; font-weight: 600; text-decoration: none;
+  transition: filter .2s, transform .15s;
+}
+.bouton-partie:hover { filter: brightness(1.12); transform: translateX(4px); }
+.bouton-partie:focus-visible { outline-color: var(--texte); }
+
+/* Un cours / une fiche : c'est ici le bloc à dupliquer */
+.course {
+  margin-bottom: 1rem; padding: 1.25rem;
+  background: var(--carte); border: 1px solid var(--bordure);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--rayon);
+}
+.course p:last-child { margin-bottom: 0; }
+.course.vide { border-style: dashed; border-left-style: dashed; color: var(--texte-doux); background: transparent; }
+
+.site-footer { text-align: center; padding: 1.5rem; color: var(--texte-doux); font-size: .9rem; border-top: 1px solid var(--bordure); }
+
+@media (max-width: 600px) {
+  main { padding-top: 1.25rem; }
+  .bouton-partie { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
