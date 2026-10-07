@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Déposer un cours — BTS SIO</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="depose">
@@ -23,10 +23,17 @@
         <li>N'envoie pas d'informations personnelles dans tes documents.</li>
       </ul>
 
-      <!-- Le formulaire Google avec dépôt de fichiers ne peut pas être intégré dans la page :
-           le bouton l'ouvre donc dans un nouvel onglet. -->
-      <a class="bouton-depot" href="https://forms.gle/SM5EXJ7nc6bLEKZo7" target="_blank" rel="noopener">Ouvrir le formulaire d'envoi</a>
-      <p class="alternative">Le formulaire s'ouvre dans un nouvel onglet. Tu reviens ensuite ici quand tu as terminé.</p>
+      <!-- À MODIFIER : remplace COLLE-ICI-LE-LIEN par le lien d'intégration de ton Google Forms
+           (Envoyer > icône <> > copie l'adresse qui suit src=") -->
+      <div class="cadre-formulaire">
+        <iframe src="COLLE-ICI-LE-LIEN" title="Formulaire de dépôt de cours">Chargement…</iframe>
+      </div>
+
+      <!-- À MODIFIER : même chose avec le lien classique (Envoyer > icône lien) -->
+      <p class="alternative">
+        Le formulaire ne s'affiche pas ?
+        <a href="COLLE-ICI-LE-LIEN-CLASSIQUE" target="_blank" rel="noopener">Ouvre-le dans un nouvel onglet</a>.
+      </p>
     </section>
 
   </main>

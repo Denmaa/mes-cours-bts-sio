@@ -3,7 +3,7 @@
    Pour changer les couleurs : modifie les variables ci-dessous.
    ========================================================== */
 :root {
-  --fond: #F5F5F0;
+  --fond: #f4f6f9;
   --carte: #ffffff;
   --texte: #1d2433;
   --texte-doux: #5a6475;
@@ -13,12 +13,13 @@
   --rayon: 10px;
   --largeur-menu: 280px;
 }
-/* Une couleur par matière : ajoute une ligne pour une nouvelle matière */
+/* Une couleur par page : ajoute une ligne pour une nouvelle matière */
 body.cejm         { --accent: #a3412b; --accent-clair: #f8e9e4; }
 body.math         { --accent: #1f6f5c; --accent-clair: #e1f2ed; }
 body.informatique { --accent: #3345b8; --accent-clair: #e8ebfa; }
 body.culture-g    { --accent: #8a5a00; --accent-clair: #f7edd6; }
 body.anglais      { --accent: #7b3fa0; --accent-clair: #f0e7f6; }
+body.depose       { --accent: #0e7490; --accent-clair: #e0f2f6; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
@@ -90,11 +91,10 @@ h3 { font-size: 1.1rem; margin: 0 0 .4rem; text-align: center; }
 section { margin-bottom: 3rem; }
 section > h2 { padding-bottom: .5rem; border-bottom: 2px solid var(--accent); }
 
-/* Cartes de l'accueil */
+/* Cartes de l'accueil (3 puis 2 centrées) */
 .grille { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-.grille .carte { width: 280px; max-width: 100%; }
 .carte {
-  display: block; padding: 1.25rem;
+  display: block; width: 280px; max-width: 100%; padding: 1.25rem;
   background: var(--carte); border: 1px solid var(--bordure);
   border-top: 5px solid var(--accent);
   border-radius: var(--rayon);
@@ -102,7 +102,7 @@ section > h2 { padding-bottom: .5rem; border-bottom: 2px solid var(--accent); }
   transition: transform .15s, box-shadow .15s;
 }
 .carte:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(20, 30, 50, .1); }
-.carte p { margin: 0; color: var(--texte-doux); font-size: .95rem; }
+.carte p { margin: 0; color: var(--texte-doux); font-size: .95rem; text-align: center; }
 .carte.cejm         { --accent: #a3412b; }
 .carte.math         { --accent: #1f6f5c; }
 .carte.informatique { --accent: #3345b8; }
@@ -129,7 +129,26 @@ section > h2 { padding-bottom: .5rem; border-bottom: 2px solid var(--accent); }
   border-radius: var(--rayon);
 }
 .course p:last-child { margin-bottom: 0; }
-.course.vide { border-style: dashed; border-left-style: dashed; color: var(--texte-doux); background: transparent; }
+.course.vide { border-style: dashed; color: var(--texte-doux); background: transparent; }
+
+/* Page "Déposer un cours" */
+.consignes {
+  max-width: 640px; margin: 0 auto 1.5rem; padding: 1rem 1.25rem 1rem 2.25rem;
+  background: var(--accent-clair);
+  border-left: 5px solid var(--accent);
+  border-radius: var(--rayon);
+}
+.consignes li { margin-bottom: .25rem; }
+.bouton-depot {
+  display: block; max-width: 640px; margin: 0 auto; padding: 1.25rem 1.4rem;
+  background: var(--accent); color: #fff; text-align: center;
+  border-radius: var(--rayon);
+  font-size: 1.2rem; font-weight: 700; text-decoration: none;
+  transition: filter .2s;
+}
+.bouton-depot:hover { filter: brightness(1.12); }
+.bouton-depot:focus-visible { outline-color: var(--texte); }
+.alternative { text-align: center; margin-top: 1rem; color: var(--texte-doux); }
 
 .site-footer { text-align: center; padding: 1.5rem; color: var(--texte-doux); font-size: .9rem; border-top: 1px solid var(--bordure); }
 
