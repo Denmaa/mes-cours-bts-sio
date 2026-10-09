@@ -12,8 +12,10 @@ const PAGES = [
   ["depose.html",       "Déposer un cours"],
 ];
 
-// Nom de la page actuelle (index.html si l'adresse finit par /)
-const pageActuelle = location.pathname.split("/").pop() || "index.html";
+// Nom de la page actuelle (index.html si l'adresse finit par /).
+// Sur GitHub Pages l'adresse peut aussi être /math sans ".html" : on l'ajoute.
+let pageActuelle = decodeURIComponent(location.pathname.split("/").pop()) || "index.html";
+if (!pageActuelle.includes(".")) pageActuelle += ".html";
 
 const liens = PAGES.map(([url, nom]) =>
   `<li><a href="${url}"${url === pageActuelle ? ' aria-current="page"' : ""}>${nom}</a></li>`

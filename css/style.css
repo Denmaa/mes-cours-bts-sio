@@ -130,6 +130,12 @@ section > h2 { padding-bottom: .5rem; border-bottom: 2px solid var(--accent); }
 }
 .course p:last-child { margin-bottom: 0; }
 .course.vide { border-style: dashed; color: var(--texte-doux); background: transparent; }
+.course h4 { margin: 1.5rem 0 .4rem; color: var(--accent); }
+.course pre {
+  background: var(--fond); border: 1px solid var(--bordure); border-radius: var(--rayon);
+  padding: .9rem 1rem; font-size: .9rem; overflow-x: auto;
+}
+.course .source { text-align: center; color: var(--texte-doux); margin-top: 0; }
 
 /* Page "Déposer un cours" */
 .consignes {

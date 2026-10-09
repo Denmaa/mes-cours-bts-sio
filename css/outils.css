@@ -1,0 +1,93 @@
+/* ==========================================================
+   OUTILS.CSS — styles des outils interactifs de la page Math
+   (convertisseur id="cvb" et calculatrice binaire id="cbc").
+   Tout est isolé sous la classe .cvb : ça ne touche pas au reste du site.
+   Pour changer les couleurs : modifie les variables --cvb-… ci-dessous.
+   ========================================================== */
+.cvb{
+  --cvb-bg:#f4f6f8; --cvb-surface:#ffffff; --cvb-fg:#17202a; --cvb-muted:#5b6774; --cvb-line:#d5dbe2;
+  --cvb-dec:#2557d6; --cvb-bin:#0f8a5f; --cvb-hex:#b4511d; --cvb-err:#c0263a;
+  --cvb-mono:ui-monospace,"Cascadia Code","JetBrains Mono",Consolas,Menlo,monospace;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--cvb-bg); color:var(--cvb-fg);
+  padding:0; border-radius:12px; border:1px solid var(--cvb-line); overflow:hidden; line-height:1.5; font-size:15px;
+}
+.cvb *{box-sizing:border-box}
+.cvb h2{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:-.01em}
+.cvb h3{margin:0 0 6px;font-size:.9rem}
+.cvb p{margin:0}
+.cvb .cvb-inner{max-width:1000px;margin:0 auto}
+.cvb h2.cvb-acc-h{margin:0;font-size:inherit}
+.cvb button.cvb-acc{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:18px 20px;cursor:pointer;color:var(--cvb-fg);border-radius:12px}
+.cvb button.cvb-acc:hover .cvb-chev{filter:brightness(1.35)}
+.cvb button.cvb-acc:focus-visible{outline:3px solid var(--cvb-dec);outline-offset:-3px}
+.cvb .cvb-acc-title{font-size:1.35rem;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.cvb .cvb-acc-sub{grid-column:1;font-size:.88rem;color:var(--cvb-muted);font-weight:400}
+.cvb .cvb-chev{grid-row:1/span 2;grid-column:2;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--cvb-fg);color:var(--cvb-surface);transition:transform .25s ease}
+.cvb .cvb-chev svg{width:18px;height:18px}
+.cvb.cvb-open .cvb-chev{transform:rotate(180deg)}
+.cvb .cvb-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.cvb.cvb-open .cvb-body{grid-template-rows:1fr}
+.cvb .cvb-body-clip{overflow:hidden;min-height:0}
+.cvb .cvb-body-in{display:grid;gap:20px;padding:0 16px 20px}
+@media (prefers-reduced-motion:reduce){.cvb .cvb-body,.cvb .cvb-chev{transition:none}}
+.cvb .cvb-lede{color:var(--cvb-muted);margin-top:4px}
+.cvb .cvb-dec{color:var(--cvb-dec)} .cvb .cvb-bin{color:var(--cvb-bin)} .cvb .cvb-hex{color:var(--cvb-hex)}
+.cvb .cvb-panel{background:var(--cvb-surface);border:1px solid var(--cvb-line);border-radius:10px;padding:18px;min-width:0}
+.cvb .cvb-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:760px){.cvb .cvb-top{grid-template-columns:1fr}}
+.cvb .cvb-field{display:grid;gap:5px;margin-bottom:12px}
+.cvb .cvb-label{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between}
+.cvb .cvb-label small{color:var(--cvb-muted);font-weight:400;letter-spacing:0;text-transform:none;font-family:var(--cvb-mono)}
+.cvb .cvb-box{display:flex;border:2px solid var(--cvb-line);border-radius:8px;overflow:hidden;background:var(--cvb-bg)}
+.cvb .cvb-box:focus-within{border-color:currentColor}
+.cvb .cvb-prefix{font-family:var(--cvb-mono);font-weight:600;padding:0 10px;display:flex;align-items:center;font-size:.9rem;background:var(--cvb-surface)}
+.cvb input{flex:1;min-width:0;border:0;background:transparent;color:var(--cvb-fg);font-family:var(--cvb-mono);font-size:1.1rem;padding:10px 12px;outline:none}
+.cvb .cvb-err{color:var(--cvb-err);font-size:.85rem;min-height:1.3em}
+.cvb .cvb-actions{display:flex;flex-wrap:wrap;gap:8px}
+.cvb button{font:inherit;font-weight:700;font-size:.88rem;border-radius:7px;padding:8px 13px;cursor:pointer;border:1px solid var(--cvb-line);background:var(--cvb-surface);color:var(--cvb-fg)}
+.cvb button.cvb-primary{background:var(--cvb-fg);color:var(--cvb-surface);border-color:var(--cvb-fg)}
+.cvb button:focus-visible,.cvb input:focus-visible{outline:3px solid var(--cvb-dec);outline-offset:2px}
+.cvb .cvb-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cvb .cvb-chips button{font-family:var(--cvb-mono);font-weight:400;font-size:.8rem;padding:3px 9px}
+.cvb .cvb-bits{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.cvb .cvb-nib{display:grid;gap:3px;justify-items:center}
+.cvb .cvb-nib-bits{display:flex;gap:2px}
+.cvb .cvb-bit{width:24px;height:28px;display:grid;place-items:center;border-radius:4px;font-family:var(--cvb-mono);font-weight:600;background:var(--cvb-bg);color:var(--cvb-muted);border:1px solid var(--cvb-line)}
+.cvb .cvb-bit.on{background:var(--cvb-bin);color:#fff;border-color:var(--cvb-bin)}
+.cvb .cvb-point{font-family:var(--cvb-mono);font-weight:800;font-size:1.4rem;align-self:start;line-height:28px;color:var(--cvb-fg)}
+.cvb .cvb-nib-hex{font-family:var(--cvb-mono);font-weight:700;color:var(--cvb-hex)}
+.cvb .cvb-steps{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start}
+.cvb .cvb-steps>*{min-width:0}
+.cvb pre{font-family:var(--cvb-mono);font-size:.8rem;line-height:1.7;background:var(--cvb-bg);border-radius:6px;padding:10px 12px;overflow-x:auto;margin:0;white-space:pre}
+.cvb .cvb-muted{color:var(--cvb-muted)}
+.cvb .cvb-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.cvb .cvb-tbl{overflow-x:auto;margin-top:10px}
+.cvb table{border-collapse:collapse;width:100%;font-family:var(--cvb-mono);font-variant-numeric:tabular-nums;font-size:.9rem}
+.cvb th{font-family:inherit;text-align:left;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;border-bottom:2px solid var(--cvb-line)}
+.cvb td{padding:6px 10px;border-bottom:1px solid var(--cvb-line);white-space:nowrap}
+.cvb tbody tr{cursor:pointer} .cvb tbody tr:hover td{background:var(--cvb-bg)}
+.cvb td.cvb-del{text-align:right} .cvb td.cvb-del button{padding:1px 8px;font-weight:400}
+.cvb .cvb-ref{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;margin-top:10px}
+.cvb .cvb-ref div{display:flex;justify-content:space-between;font-family:var(--cvb-mono);font-size:.86rem;padding:5px 10px;border:1px solid var(--cvb-line);border-radius:6px;background:var(--cvb-surface)}
+
+/* Ajustements par rapport au style général du site */
+section.cvb{margin-bottom:1.25rem}
+.cvb h3{text-align:left}
+.cvb input::placeholder{color:var(--cvb-muted);opacity:.75;text-transform:none;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:.95rem}
+
+/* ---------- Calculatrice binaire ---------- */
+.cvb .cbc-eq{font-size:.85rem;color:var(--cvb-muted);min-height:1.3em;font-family:var(--cvb-mono)}
+.cvb .cbc-ops{display:flex;gap:6px;margin:2px 0 12px}
+.cvb .cbc-ops button{flex:1;font-family:var(--cvb-mono);font-size:1.25rem;padding:6px 0}
+.cvb .cbc-ops button[aria-pressed="true"]{background:var(--cvb-fg);color:var(--cvb-surface);border-color:var(--cvb-fg)}
+.cvb .cbc-result{background:var(--cvb-bg);border:1px solid var(--cvb-line);border-radius:8px;padding:12px 14px;margin-bottom:12px}
+.cvb .cbc-res-title{font-size:.85rem;color:var(--cvb-muted);margin-bottom:6px;font-family:var(--cvb-mono)}
+.cvb .cbc-res-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center}
+.cvb .cbc-res-grid output{font-family:var(--cvb-mono);font-size:1.1rem;font-weight:600;overflow-wrap:anywhere}
+.cvb .cbc-check{font-size:.88rem;margin:0}
+.cvb .cbc-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px}
+.cvb .cbc-rules div{border:1px solid var(--cvb-line);border-radius:8px;padding:10px 12px;background:var(--cvb-surface)}
+.cvb .cbc-rules h4{margin:0 0 4px;font-size:.9rem}
+.cvb .cbc-rules pre{font-size:.82rem;background:transparent;padding:0;white-space:pre-wrap}
+.cvb .cbc-tip{font-size:.88rem;margin-top:10px}
